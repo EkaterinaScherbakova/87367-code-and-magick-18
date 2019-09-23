@@ -1,3 +1,5 @@
+'use strict';
+
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
@@ -5,7 +7,7 @@ var CLOUD_Y = 10;
 var GRAPH_HEIGHT = 150;
 var GRAPH_STEP = 90;
 
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(CLOUD_X + 10, CLOUD_Y + 10, CLOUD_WIDTH, CLOUD_HEIGHT);
   ctx.fillStyle = '#fff';
@@ -17,9 +19,9 @@ window.renderStatistics = function(ctx, names, times) {
   ctx.fillText('Ура вы победили!', CLOUD_X + 30, CLOUD_Y + 20);
   ctx.fillText('Список результатов:', CLOUD_X + 30, CLOUD_Y + 40);
 
-  var maxTime = Math.max(...times);
+  var maxTime = Math.max.apply(Math, times);
 
-  for (var i = 0; i < times.length; i++){
+  for (var i = 0; i < times.length; i++) {
     var scoreHeight = GRAPH_HEIGHT * times[i] / maxTime;
     var scorePositionX = CLOUD_X + 50 + GRAPH_STEP * i;
 
@@ -31,4 +33,4 @@ window.renderStatistics = function(ctx, names, times) {
     ctx.fillText(Math.ceil(times[i]), scorePositionX, (CLOUD_HEIGHT - 25 - scoreHeight - 20));
     ctx.fillText(names[i], scorePositionX, CLOUD_HEIGHT - 15);
   }
-}
+};
