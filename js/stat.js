@@ -22,20 +22,24 @@ var createCloudTitle = function (ctx) {
   ctx.fillText('Список результатов:', CLOUD_X + 30, CLOUD_Y + 40);
 };
 
+var createScore = function (ctx, name, time, maxTime, scorePositionX) {
+  var scoreHeight = GRAPH_HEIGHT * time / maxTime;
+
+  ctx.fillStyle = (name === 'Вы')
+    ? 'rgba(255, 0, 0, 1)'
+    : 'hsl(240,' + Math.ceil(Math.random() * 100) + '% , 50%)';
+  ctx.fillRect(scorePositionX, CLOUD_HEIGHT - 25, 40, -scoreHeight);
+  ctx.fillStyle = '#000';
+  ctx.fillText(Math.ceil(time), scorePositionX, (CLOUD_HEIGHT - 25 - scoreHeight - 20));
+  ctx.fillText(name, scorePositionX, CLOUD_HEIGHT - 15);
+};
+
 var createStatistic = function (ctx, names, times) {
   var maxTime = Math.max.apply(Math, times);
 
   for (var i = 0; i < times.length; i++) {
-    var scoreHeight = GRAPH_HEIGHT * times[i] / maxTime;
     var scorePositionX = CLOUD_X + 50 + GRAPH_STEP * i;
-
-    ctx.fillStyle = (names[i] === 'Вы')
-      ? 'rgba(255, 0, 0, 1)'
-      : 'hsl(240,' + Math.ceil(Math.random() * 100) + '% , 50%)';
-    ctx.fillRect(scorePositionX, CLOUD_HEIGHT - 25, 40, -scoreHeight);
-    ctx.fillStyle = '#000';
-    ctx.fillText(Math.ceil(times[i]), scorePositionX, (CLOUD_HEIGHT - 25 - scoreHeight - 20));
-    ctx.fillText(names[i], scorePositionX, CLOUD_HEIGHT - 15);
+    createScore(ctx, names[i], times[i], maxTime, scorePositionX);
   }
 };
 
