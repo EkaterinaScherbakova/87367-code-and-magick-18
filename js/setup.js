@@ -6,13 +6,18 @@ var COATCOLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)
 var EYESCOLORS = ['black', 'red', 'blue', 'yellow', 'green'];
 var CHARACTERS_COUNT = 4;
 
+var generateRandomNumber = function (min, max) {
+  var randomNumber = Math.round(Math.random() * (max - min) + min);
+  return randomNumber;
+};
+
 var generateCharacters = function () {
   var characters = [];
 
   for (var i = 0; i < CHARACTERS_COUNT; i++) {
-    var name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' + SURNAMES[Math.round(Math.random() * (SURNAMES.length - 1))];
-    var coatColor = COATCOLORS[Math.round(Math.random() * (COATCOLORS.length - 1))];
-    var eyesColor = EYESCOLORS[Math.round(Math.random() * (EYESCOLORS.length - 1))];
+    var name = NAMES[generateRandomNumber(0, NAMES.length - 1)] + ' ' + SURNAMES[generateRandomNumber(0, SURNAMES.length - 1)];
+    var coatColor = COATCOLORS[generateRandomNumber(0, COATCOLORS.length - 1)];
+    var eyesColor = EYESCOLORS[generateRandomNumber(0, EYESCOLORS.length - 1)];
     characters[i] = {
       name: name,
       coatColor: coatColor,
